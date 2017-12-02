@@ -1,3 +1,19 @@
-<p>
-  chatbox-list works!
-</p>
+<div class="header pl-3 py-2 d-flex justify-content-between">
+  <div>
+    <a class="mr-3">Tin nhắn mới</a>
+    <a>Thêm nhóm mới</a>
+  </div>
+  <div class="pr-3">
+    <a class="text-dark settings"><i class="material-icons">settings</i></a>
+  </div>
+</div>
+
+<div class="body">
+  <perfect-scrollbar style="max-height: 350px">
+    <app-chatbox-list-item *ngFor="let chatbox of chatboxList"></app-chatbox-list-item>
+  </perfect-scrollbar>
+</div>
+
+<div class="search py-2 px-3 my-3 mx-2">
+  <input type="text" placeholder="Tìm kiếm ..." />
+</div>

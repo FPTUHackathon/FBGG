@@ -1,5 +1,53 @@
 :host {
     z-index: 8000;
+    top: 148px;
+    left: 222px;
     position: absolute;
     display: block;
+}
+
+:host::before {
+    width: 0;
+    top: 0;
+    left: -12px;
+    position: absolute;
+    height: 0;
+    content: '';
+    border-top: 12px solid transparent;
+    border-bottom: 12px solid transparent;
+    border-right: 12px solid #fff; 
+}
+
+.header {
+    a {
+        &:hover {
+            text-decoration: underline;
+        }
+
+        color: #4ab7f5;
+    }
+}
+
+
+.search {
+    color: #464646;
+    border-radius: 10px;
+    border: 1px solid #cecece;
+
+    input {
+        width: 100%;
+        outline: none;
+        border: none;
+
+        &::-moz-placeholder {
+            font-style: italic;
+        }
+    }
+}
+
+.settings {
+    .material-icons {
+        font-size: 14px;
+        color: #a4a4a4 !important;
+    }
 }

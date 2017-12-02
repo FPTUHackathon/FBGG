@@ -23,7 +23,8 @@ import { SuggestComponent } from './menu/right-menu/suggest/suggest.component';
 import { PreloadPostComponent } from './homepage/body/main-body/post-list/preload-post/preload-post.component';
 import { CreatePostDialogComponent } from './menu/aside-menu/create-post-dialog/create-post-dialog.component';
 import { ChatboxListComponent } from './menu/aside-menu/chatbox-list/chatbox-list.component';
-import { ChatboxListItemComponent } from './menu/aside-menu/chatbox-list-item/chatbox-list-item.component';
+import { ChatboxListItemComponent } from './menu/aside-menu/chatbox-list/chatbox-list-item/chatbox-list-item.component';
+import { ChatboxComponent } from './chatbox/chatbox.component';
 
 @NgModule({
   imports: [
@@ -50,7 +51,8 @@ import { ChatboxListItemComponent } from './menu/aside-menu/chatbox-list-item/ch
     PreloadPostComponent,
     CreatePostDialogComponent,
     ChatboxListComponent,
-    ChatboxListItemComponent
+    ChatboxListItemComponent,
+    ChatboxComponent
   ],
   entryComponents: [
     CreatePostDialogComponent,

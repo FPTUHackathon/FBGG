@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostBinding } from '@angular/core';
 
 @Component({
   selector: 'app-chatbox-list-item',
@@ -6,6 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./chatbox-list-item.component.scss']
 })
 export class ChatboxListItemComponent implements OnInit {
+  @HostBinding('class') classes = 'd-flex py-3 pl-2 mr-2';
 
   constructor() { }
 

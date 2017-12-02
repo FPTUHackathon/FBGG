@@ -8,9 +8,10 @@ import { DEFAULT_AVATAR_PATH } from './../../../shared/constants/constants';
 import { AuthService } from './../../../shared/services/auth/auth.service';
 import { UserSocketService } from '../../../shared/services/user/user-socket.service';
 import { UserService } from '../../../shared/services/user/user.service';
+import { ChatboxListService } from '../../../shared/services/chatbox-list/chatbox-list.service';
 
 import { CreatePostDialogComponent } from './create-post-dialog/create-post-dialog.component';
-import { ChatboxListComponent } from './chatbox-list/chatbox-list.component';
+// import { ChatboxListComponent } from './chatbox-list/chatbox-list.component';
 
 @Component({
   selector: 'app-aside-menu',
@@ -34,7 +35,8 @@ export class AsideMenuComponent implements OnInit, OnDestroy {
     private dialog: MatDialog,
     private authService: AuthService,
     private userSocketService: UserSocketService,
-    private userService: UserService
+    private userService: UserService,
+    private chatboxListService: ChatboxListService
   ) { }
 
   ngOnInit() {
@@ -60,6 +62,6 @@ export class AsideMenuComponent implements OnInit, OnDestroy {
   }
 
   toggleChatboxList() {
-    this.isDisplayChatboxList = !this.isDisplayChatboxList;
+    this.chatboxListService.setDisplayChatboxListStatus(!this.chatboxListService.getDisplayChatboxListStatus());
   }
 }

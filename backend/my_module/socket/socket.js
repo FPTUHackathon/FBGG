@@ -1,3 +1,5 @@
+import { read } from "fs";
+
 exports.connectSocket = function(server,app){
 	var jwt = require("jsonwebtoken");
 	var io = require("socket.io")(server);
@@ -17,13 +19,15 @@ exports.connectSocket = function(server,app){
 	user_comment_post.createCollection();
 	var user_topic = require("../database/use_topic");
 	user_topic.createCollection();
-	var msg_2 = require("../database/msg_2");
-	msg_2.createCollection();
 	var msg_group = require("../database/msg_group");
 	msg_group.createCollection();
 	var name_msg_group = require("../database/name_msg_group");
 	name_msg_group.createCollection();
-	
+	var msg_2 = require("../database/msg_2");
+	msg_2.createCollection();
+	var name_msg_2 = require("../database/name_msg_2");
+	name_msg_2.createCollection();
+
 
 	io.on("connection",function(socket){
 		console.log("connected socket: " + socket.id);
@@ -209,22 +213,32 @@ exports.connectSocket = function(server,app){
 				});
 			});	
 		});
-		// new msg 2
-		socket.on("req_new_msg",function(data){
-			msg_2.addCollection(data);
-			io.emit("server_send_msg_new",data);
+		// req creat chat 2
+		socket.on("req_creat_2",function(data){
+			name_msg_2.addCollection(data);
 		});
-		// server send all msg 2
-		socket.on("req_send_all_msg",function(data){
+		//get name msg 2
+		socket.on("req_send_all_name_msg_2",function(data){
+			name_msg_2.find({user_id_msg_2:data.user_id_msg_2}).then(function(items){
+				socket.emit("server_send_all_name_group",items);
+			});
+		});
+		// new msg 2
+		socket.on("req_new_msg_2",function(data){
+			msg_2.addCollection(data);
+		});
+		//server send all msg 2 
+		socket.on("req_send_all_msg_2",function(data){
 			mongo_client.connect(url, function(err, db) {
 				if (err) throw err;
-				db.collection("msg_2").find({user_id_send:data.user_id_send,user_id_receive:data.user_id_receive}).limit(5).toArray(function(err, result) {
+				db.collection("msg_2").find({user_id_send:data.user_id_send}).limit(5).toArray(function(err, result) {
 				  if (err) throw err;
 				  socket.emit("server_send_all_msg_limit_5",result);
 				  db.close();
 				});
 			});
 		});
+
 		// req creat chat group
 		socket.on("req_creat_group",function(data){
 			name_msg_group.addCollection(data);

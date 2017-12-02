@@ -29,7 +29,7 @@
     "bootstrap": "^4.0.0-beta.2",
     "core-js": "^2.4.1",
     "font-awesome": "^4.7.0",
-    "ngx-perfect-scrollbar": "^4.9.5",
+    "ngx-perfect-scrollbar": "^5.0.5",
     "rxjs": "^5.5.2",
     "socket.io-client": "^2.0.4",
     "time-ago-pipe": "^1.2.1",

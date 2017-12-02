@@ -1,0 +1,96 @@
+<div class="header d-flex justify-content-between align-items-center p-2">
+    <div class="d-flex align-items-center">
+      <a class="img-wrapper d-block avatar mr-2">
+        <img src="/assets/imgs/default_avatar.png" alt="" />
+      </a>
+      <a class="text-white title">Nguyễn Trường Giang</a>
+    </div>
+    <div class="d-flex text-white">
+      <a class="px-2 font-weight-bold"><i class="fa fa-plus"></i></a>
+      <a class="px-2 font-weight-bold" (click)="collapseChatbox()"><i class="fa fa-minus"></i></a>
+      <a class="px-2 font-weight-bold" (click)="closeChatbox()"><i class="fa fa-times"></i></a>
+    </div>
+</div>
+
+<div class="body w-100 pl-2 pb-2" *ngIf="!chatbox.isCollapse">
+  <perfect-scrollbar style="max-height: 290px" class="pr-2" #chatList>
+    <div class="chat-list">
+      <div class="d-flex flex-column">
+        <div class="text-wrapper mb-2">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce tristique, dui eget facilisis vehicula, mi est sagittis arcuaaaaaaaaaaa
+        </div>
+        <div class="text-wrapper mb-2">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce tristique, dui eget facilisis vehicula, mi est sagittis arcuaaaaaaaaaaa
+        </div>
+        <div class="text-wrapper mb-2">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce tristique, dui eget facilisis vehicula, mi est sagittis arcuaaaaaaaaaaa
+        </div>
+        <div class="text-wrapper mb-2">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce tristique, dui eget facilisis vehicula, mi est sagittis arcuaaaaaaaaaaa
+        </div>
+        <div class="text-wrapper mb-2">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce tristique, dui eget facilisis vehicula, mi est sagittis arcuaaaaaaaaaaa
+        </div>
+        <div class="text-wrapper mb-2">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce tristique, dui eget facilisis vehicula, mi est sagittis arcuaaaaaaaaaaa
+        </div>
+        <div class="text-wrapper mb-2">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce tristique, dui eget facilisis vehicula, mi est sagittis arcuaaaaaaaaaaa
+        </div>
+        <div class="text-wrapper mb-2">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce tristique, dui eget facilisis vehicula, mi est sagittis arcuaaaaaaaaaaa
+        </div>
+        <div class="text-wrapper mb-2">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce tristique, dui eget facilisis vehicula, mi est sagittis arcuaaaaaaaaaaa
+        </div>
+        <div class="text-wrapper mb-2">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce tristique, dui eget facilisis vehicula, mi est sagittis arcuaaaaaaaaaaa
+        </div>
+        <div class="text-wrapper mb-2">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce tristique, dui eget facilisis vehicula, mi est sagittis arcuaaaaaaaaaaa
+        </div>
+        <div class="text-wrapper mb-2">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce tristique, dui eget facilisis vehicula, mi est sagittis arcuaaaaaaaaaaa
+        </div>
+        <div class="text-wrapper mb-2">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce tristique, dui eget facilisis vehicula, mi est sagittis arcuaaaaaaaaaaa
+        </div>
+        <div class="mt-4"></div>
+        <div class="d-flex flex-column align-items-end">
+          <div class="my-text-wrapper mb-2">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce tristique, dui eget facilisis vehicula, mi est sagittis arcuaaaaaaaaaaa
+          </div>
+        </div>
+      </div>
+  
+    </div>
+  </perfect-scrollbar>
+  <div class="write">
+    <form (ngSubmit)="sendMessage()" [formGroup]="messageForm">
+      <textarea type="text" placeholder="Viết tin nhắn..." class="w-100" autosize rows="1" formControlName="message" (keyup)="sendMessage($event)"></textarea>
+    </form>
+  </div>
+</div>
+
+<div class="footer" *ngIf="!chatbox.isCollapse">
+  <div class="d-flex px-2">
+    <a class="w-100 d-flex align-items-center">
+      <div class="img-wrapper icon d-block mr-2">
+        <img src="/assets/imgs/picture(1).png" alt="" />
+      </div>
+      <div>Thêm ảnh</div>
+    </a>
+    <a class="w-100 d-flex align-items-center">
+      <div class="img-wrapper icon d-block mr-2">
+        <img src="/assets/imgs/icon.png" alt="" />
+      </div>
+      <div>Thêm tệp</div>
+    </a>
+    <a class="w-100 d-flex align-items-center">
+      <div class="img-wrapper icon d-block mr-2">
+        <img src="/assets/imgs/post-it.png" alt="" />
+      </div>
+      <div>Thêm bài viết</div>
+    </a>
+  </div>
+</div>

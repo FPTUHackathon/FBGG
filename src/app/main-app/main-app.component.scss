@@ -1,3 +1,10 @@
 :host {
     padding-left: 222px;
 }
+
+.chatbox-container {
+    right: 0;
+    position: fixed;
+    display: flex;
+    bottom: 0;
+}

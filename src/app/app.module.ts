@@ -23,6 +23,8 @@ import { PostService } from './shared/services/post/post.service';
 import { UserService } from './shared/services/user/user.service';
 import { UserSocketService } from './shared/services/user/user-socket.service';
 import { PostSocketService } from './shared/services/post/post-socket.service';
+import { ChatboxListService } from './shared/services/chatbox-list/chatbox-list.service';
+import { ChatboxService } from './shared/services/chatbox/chatbox.service';
 
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
@@ -61,7 +63,9 @@ import { NotFoundComponent } from './not-found/not-found.component';
     PostSocketService,
     TopicService,
     UserService,
-    UserSocketService
+    UserSocketService,
+    ChatboxListService,
+    ChatboxService
   ],
   bootstrap: [AppComponent]
 })

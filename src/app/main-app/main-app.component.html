@@ -1,3 +1,11 @@
 <app-aside-menu [user]="user"></app-aside-menu>
 <router-outlet></router-outlet>
 <app-right-menu></app-right-menu>
+
+<app-chatbox-list *ngIf="isDisplayChatboxList"></app-chatbox-list>
+
+<div class="chatbox-container pr-2">
+    <ng-container *ngFor="let chatbox of chatboxList; let i = index">
+        <app-chatbox *ngIf="!chatbox.isClose" [chatbox]="chatbox" [index]="index"></app-chatbox>
+    </ng-container>
+</div>
