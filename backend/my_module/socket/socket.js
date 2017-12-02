@@ -1,4 +1,4 @@
-import { read } from "fs";
+
 
 exports.connectSocket = function(server,app){
 	var jwt = require("jsonwebtoken");
@@ -18,16 +18,13 @@ exports.connectSocket = function(server,app){
 	var user_comment_post = require("../database/user_comment_post");
 	user_comment_post.createCollection();
 	var user_topic = require("../database/use_topic");
-	user_topic.createCollection();
-	var msg_group = require("../database/msg_group");
-	msg_group.createCollection();
-	var name_msg_group = require("../database/name_msg_group");
-	name_msg_group.createCollection();
+	user_topic.createCollection();	
 	var msg_2 = require("../database/msg_2");
 	msg_2.createCollection();
 	var name_msg_2 = require("../database/name_msg_2");
 	name_msg_2.createCollection();
-
+	var note = require("../database/note");
+	note.createCollection();
 
 	io.on("connection",function(socket){
 		console.log("connected socket: " + socket.id);
@@ -213,55 +210,51 @@ exports.connectSocket = function(server,app){
 				});
 			});	
 		});
+		// chat
+		socket.on("req_chat_2",function(data){
+			io.emit("server_send_user_receive_msg",{id_receive:data.id_receive,id_send:data.id_send});
+			
+		});
+
 		// req creat chat 2
 		socket.on("req_creat_2",function(data){
 			name_msg_2.addCollection(data);
 		});
 		//get name msg 2
 		socket.on("req_send_all_name_msg_2",function(data){
-			name_msg_2.find({user_id_msg_2:data.user_id_msg_2}).then(function(items){
+			name_msg_2.find({array_id_user:data.array_id_user}).then(function(items){
 				socket.emit("server_send_all_name_group",items);
 			});
 		});
 		// new msg 2
 		socket.on("req_new_msg_2",function(data){
 			msg_2.addCollection(data);
+			io.emit("server_send_new_msg",data);
 		});
-		//server send all msg 2 
+		//server send all msg 2 limit 5 
 		socket.on("req_send_all_msg_2",function(data){
 			mongo_client.connect(url, function(err, db) {
 				if (err) throw err;
-				db.collection("msg_2").find({user_id_send:data.user_id_send}).limit(5).toArray(function(err, result) {
+				db.collection("msg_2").find({array_id_user:data.array_id_user}).limit(5).toArray(function(err, result) {
 				  if (err) throw err;
 				  socket.emit("server_send_all_msg_limit_5",result);
 				  db.close();
 				});
 			});
 		});
-
-		// req creat chat group
-		socket.on("req_creat_group",function(data){
-			name_msg_group.addCollection(data);
+		//delete note
+		socket.on("req_del_note",function(data){
+			note.deleted(data);
 		});
-		//get name group
-		socket.on("req_send_all_name_group",function(data){
-			name_msg_group.find({user_id_group:data.user_id_group}).then(function(items){
-				socket.emit("server_send_all_name_group",items);
-			});
+		//new note
+		socket.on("req_new_note",function(data){
+			note.addCollection(data);
+			socket.emit("server_send_new_note",data);
 		});
-		// new msg group
-		socket.on("req_new_msg_group",function(data){
-			msg_group.addCollection(data);
-		});
-		//server send all msg 
-		socket.on("req_send_all_msg_group",function(data){
-			mongo_client.connect(url, function(err, db) {
-				if (err) throw err;
-				db.collection("msg_group").find({user_id_group:data.user_id_group}).limit(5).toArray(function(err, result) {
-				  if (err) throw err;
-				  socket.emit("server_send_all_msg_limit_5",result);
-				  db.close();
-				});
+		// get all note
+		socket.on("req_send_note",function(data){
+			note.find({id_user:data.id_user}).then(function(items){
+				socket.emit("server_send_all_note",items);
 			});
 		});
 	});

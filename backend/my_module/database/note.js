@@ -2,7 +2,7 @@ var mongo_client = require("mongodb").MongoClient;
 var url = "mongodb://localhost:27017/data_fbgg";
 var autoIncrement = require("mongodb-autoincrement");
 
-var name_collection = "name_msg_group";
+var name_collection = "note";
 
 exports.createCollection = function(){	
 	mongo_client.connect(url,function(err,db){
@@ -22,9 +22,12 @@ exports.addCollection = function(data){
 				autoIncrement.getNextSequence(db, name_collection, function (err, autoIndex) {
 			        var collection = db.collection(name_collection);
 			        collection.insert({
-			            _id: autoIndex,
-                        user_id_group:data.user_id_group, // array id
-                        name_group:data.name_group
+                        _id: autoIndex,
+						id_user:data.id_user,
+						id_post:data.id_post,
+                        content:data.content,
+                        link:data.link,
+                        type:data.type
 			        });
 			        console.log("inserted collection "+ name_collection);
 			    });

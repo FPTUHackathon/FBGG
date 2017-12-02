@@ -42,7 +42,7 @@
         <span class="ml-2">{{ post.like || 0 }}</span>
       </div>
       <div class="w-100 text-center">
-        <a><i class="fa fa-map-pin" style="color: #3d78ff"></i></a>
+        <a (click)="note(post)"><i class="fa fa-map-pin" style="color: #3d78ff"></i></a>
         <span class="ml-2">{{ post.pin || 0 }}</span>
       </div>
       <div class="w-100 text-center">

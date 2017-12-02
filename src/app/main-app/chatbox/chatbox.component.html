@@ -1,9 +1,9 @@
 <div class="header d-flex justify-content-between align-items-center p-2">
     <div class="d-flex align-items-center">
       <a class="img-wrapper d-block avatar mr-2">
-        <img src="/assets/imgs/default_avatar.png" alt="" />
+        <img [src]="chatbox.targetUser.avatar || '/assets/imgs/default_avatar.png'" alt="" />
       </a>
-      <a class="text-white title">Nguyễn Trường Giang</a>
+      <a class="text-white title">{{ chatbox.targetUser.nickName || chatbox.targetUser.name }}</a>
     </div>
     <div class="d-flex text-white">
       <a class="px-2 font-weight-bold"><i class="fa fa-plus"></i></a>
@@ -14,53 +14,23 @@
 
 <div class="body w-100 pl-2 pb-2" *ngIf="!chatbox.isCollapse">
   <perfect-scrollbar style="max-height: 290px" class="pr-2" #chatList>
-    <div class="chat-list">
-      <div class="d-flex flex-column">
-        <div class="text-wrapper mb-2">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce tristique, dui eget facilisis vehicula, mi est sagittis arcuaaaaaaaaaaa
-        </div>
-        <div class="text-wrapper mb-2">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce tristique, dui eget facilisis vehicula, mi est sagittis arcuaaaaaaaaaaa
-        </div>
-        <div class="text-wrapper mb-2">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce tristique, dui eget facilisis vehicula, mi est sagittis arcuaaaaaaaaaaa
-        </div>
-        <div class="text-wrapper mb-2">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce tristique, dui eget facilisis vehicula, mi est sagittis arcuaaaaaaaaaaa
-        </div>
-        <div class="text-wrapper mb-2">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce tristique, dui eget facilisis vehicula, mi est sagittis arcuaaaaaaaaaaa
-        </div>
-        <div class="text-wrapper mb-2">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce tristique, dui eget facilisis vehicula, mi est sagittis arcuaaaaaaaaaaa
-        </div>
-        <div class="text-wrapper mb-2">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce tristique, dui eget facilisis vehicula, mi est sagittis arcuaaaaaaaaaaa
-        </div>
-        <div class="text-wrapper mb-2">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce tristique, dui eget facilisis vehicula, mi est sagittis arcuaaaaaaaaaaa
-        </div>
-        <div class="text-wrapper mb-2">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce tristique, dui eget facilisis vehicula, mi est sagittis arcuaaaaaaaaaaa
-        </div>
-        <div class="text-wrapper mb-2">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce tristique, dui eget facilisis vehicula, mi est sagittis arcuaaaaaaaaaaa
-        </div>
-        <div class="text-wrapper mb-2">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce tristique, dui eget facilisis vehicula, mi est sagittis arcuaaaaaaaaaaa
-        </div>
-        <div class="text-wrapper mb-2">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce tristique, dui eget facilisis vehicula, mi est sagittis arcuaaaaaaaaaaa
-        </div>
-        <div class="text-wrapper mb-2">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce tristique, dui eget facilisis vehicula, mi est sagittis arcuaaaaaaaaaaa
-        </div>
+    <div class="chat-list d-flex flex-column justify-content-end">
+      <div class="d-flex flex-column-reverse w-100">
+        <ng-container *ngFor="let message of chatbox.messages">
+          <ng-container *ngIf="message.id_user_send != chatbox.targetUser._id">
+            <div class="text-wrapper mb-2">
+              {{ message.content }}
+            </div>
+          </ng-container>
+          <ng-container *ngIf="message.id_user_send == chatbox.targetUser._id">
+            <div class="d-flex flex-column align-items-end">
+              <div class="my-text-wrapper mb-2">
+                {{ message.content }}
+              </div>
+            </div>
+          </ng-container>
+        </ng-container>
         <div class="mt-4"></div>
-        <div class="d-flex flex-column align-items-end">
-          <div class="my-text-wrapper mb-2">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce tristique, dui eget facilisis vehicula, mi est sagittis arcuaaaaaaaaaaa
-          </div>
-        </div>
       </div>
   
     </div>
@@ -73,7 +43,7 @@
 </div>
 
 <div class="footer" *ngIf="!chatbox.isCollapse">
-  <div class="d-flex px-2">
+  <div class="d-flex p-2">
     <a class="w-100 d-flex align-items-center">
       <div class="img-wrapper icon d-block mr-2">
         <img src="/assets/imgs/picture(1).png" alt="" />

@@ -22,7 +22,8 @@ export class PostSocketService implements OnInit {
   }
 
   consumeEventOnAdd() {
-    Socket.on('new_post', data => {
+    Socket.on('server_send_new_post', data => {
+      console.log(data);
       const user = this.userService.getUser();
       data.user = user;
 

@@ -11,9 +11,11 @@ export class UserService {
   private user: any = {};
   private postedDocuments: any[] = [];
   private concernTopics: any = {};
+  private notes: any[] = [];
 
   userChange: Subject<any> = new Subject<any>();
   postedDocumentsChange: Subject<any[]> = new Subject<any[]>();
+  notesChange: Subject<any[]> = new Subject<any[]>();
 
   constructor(
     private authService: AuthService
@@ -50,5 +52,22 @@ export class UserService {
   addPostedDocument(document: any) {
     this.postedDocuments.unshift(document);
     this.postedDocumentsChange.next(this.postedDocuments);
+  }
+
+  getNotes(): any[] {
+    return this.notes;
+  }
+
+  setNotes(notes: any) {
+    this.notes = notes;
+    this.notesChange.next(notes);
+  }
+
+  addNote(note: any) {
+    this.notes.unshift(note);
+  }
+
+  deleteNote(index: number) {
+    this.notes.splice(index, 1);
   }
 }

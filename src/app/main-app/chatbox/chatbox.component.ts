@@ -2,6 +2,7 @@ import { Component, OnInit, Input, ViewChild, HostBinding } from '@angular/core'
 import { FormGroup, FormBuilder } from '@angular/forms';
 
 import { ChatboxService } from '../../shared/services/chatbox/chatbox.service';
+import { MessageSocketService } from '../../shared/services/chatlog/message-socket.service';
 
 @Component({
   selector: 'app-chatbox',
@@ -18,7 +19,8 @@ export class ChatboxComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private chatboxService: ChatboxService
+    private chatboxService: ChatboxService,
+    private messageSocketService: MessageSocketService
   ) { }
 
   ngOnInit() {
@@ -33,6 +35,17 @@ export class ChatboxComponent implements OnInit {
 
   sendMessage(e) {
     if (e.key === 'Enter') {
+      const data: any = {};
+      data.array_id_user = this.chatbox.array_id_user;
+      data.msg = {
+        id_user_send: this.chatbox.currentUser._id,
+        content: this.messageForm.value.message,
+        created_at: new Date(),
+        updated_at: new Date(),
+        type: 1,
+        user_seen: [this.chatbox.currentUser._id]
+      }
+      this.messageSocketService.sendMessage(data);
       this.messageForm.reset();
     }
   }
