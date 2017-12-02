@@ -1,0 +1,6 @@
+<form class="d-flex align-items-center search mb-3" [formGroup]="searchForm" (ngSubmit)="onSubmit()">
+    <input type="text" placeholder="Tìm kiếm" class="w-100 pl-3" formControlName="query" />
+    <button type="submit" class="submit"><i class="fa fa-search"></i></button>
+</form>
+
+<app-post-list></app-post-list>

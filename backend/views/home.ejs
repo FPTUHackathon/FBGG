@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>home</title>
+	<script src="/socket.io/socket.io.js"></script>
+	<link rel="stylesheet" href="">
+	<script>
+		var socket = io("http://localhost:3000");
+		// socket.emit("user_send_post_new",1);
+		// socket.on("new_post",function(data){
+		// 	console.log(data);
+		// });
+		socket.emit("req_send_all_post",1);
+		socket.on("server_send_all_post",function(data){
+			console.log(data);
+		});
+
+		// setTimeout(() => {
+		// 	socket.emit("send_post_timeout",1);
+		// 	socket.on("server_send_array_post",function(data){
+		// 		console.log(data);
+		// 	})
+		// }, 2000);
+		
+	</script>
+</head>
+<body>
+	hello word !
+</body>
+</html>

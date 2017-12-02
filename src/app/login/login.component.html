@@ -1,0 +1,29 @@
+<div class="d-flex align-items-center justify-content-center login-wrapper">
+  <div class="login-box mat-elevation-z2 p-4 bg-white">
+    <h4 class="text-center text-uppercase">Đăng nhập</h4>
+    <form [formGroup]="loginForm" class="row" (ngSubmit)="onSubmit()">
+      <div class="col-12">
+        <mat-form-field color="primary" class="w-100">
+          <input matInput placeholder="Email" formControlName="mail" required="required" />
+          <mat-error *ngIf="(loginForm.controls.mail.touched || submitted) && loginForm.controls.mail.hasError('required')">{{ errorMessages.mail.required }}</mat-error>
+        </mat-form-field>
+      </div>
+      <div class="col-12 mb-3">
+        <mat-form-field color="primary" class="w-100">
+          <input matInput placeholder="Mật khẩu" formControlName="password" required="required" type="password" />
+          <mat-error *ngIf="(loginForm.controls.password.touched || submitted) && loginForm.controls.password.hasError('required')">{{ errorMessages.password.required }}</mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="col-6">
+        <mat-checkbox color="primary">Lưu đăng nhập</mat-checkbox>
+      </div>
+      <div class="col-6 text-right">
+        <a href="#">Quên mật khẩu?</a>
+      </div>
+      <div class="col-12 text-center mt-3">
+        <button mat-raised-button type="submit" color="primary">Đăng nhập</button>
+      </div>
+    </form>
+  </div>
+</div>

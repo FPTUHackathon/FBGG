@@ -1,0 +1,42 @@
+:host {
+    width: 256px;
+    // right: 0;
+    // position: fixed;
+    overflow: auto;
+    height: 100vh;
+    border-radius: 10px 0 0 10px;
+}
+
+.title {
+    color: #09843e;
+}
+
+
+.write {
+    textarea {
+        outline: none;
+        flex-grow: 1;
+        font-size: 14px;
+        color: #535353;
+        border: none;
+
+        &::-webkit-input-placeholder {
+            font-style: italic;
+        }
+    }
+}
+
+.topic-title {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    width: 160px;
+}
+
+.note-list {
+    font-size: 14.5px;
+}
+
+.note-text {
+    width: calc(100% - 18px - 1rem);
+}

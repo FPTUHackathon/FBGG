@@ -1,0 +1,95 @@
+:host {
+    display: block;
+}
+
+:host ::ng-deep mat-card {
+    background-color: #f4f7f5;
+}
+
+a:hover{
+    text-decoration: underline !important;
+}
+
+.avatar {
+    width: 40px;
+    height: 40px;
+}
+
+.user-name {
+    white-space: nowrap;
+    font-size: 13px;
+    color: #09843e;
+}
+
+.posted-time {
+    font-size: 11px;
+    color: #9fa1a0;
+}
+
+.post-title {
+    font-size: 15px;
+}
+
+.post-description {
+    font-size: 13px;
+    color: #656565;
+}
+
+.document {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    font-size: 14px;
+    border-radius: 10px;
+    border: 1px solid #dfe1e0;
+
+    a {
+        text-decoration: none !important;
+        color: #3d9e64;
+    }
+}
+
+.user-comment-avatar {
+    white-space: nowrap;
+    width: 22px;
+    height: 22px;
+}
+
+.comment-content {
+    font-size: 13px;
+    color: #434443;
+
+    p {
+        margin: 0;
+    }
+}
+
+.more {
+    font-size: 13px;
+}
+
+.my-comment {
+    input {
+        outline: none;
+        font-size: 13px;
+        border-radius: 10px;
+        border: none;
+        background-color: #e1e3e2;
+
+        &::-webkit-input-placeholder {
+            font-style: italic;
+            color: #a3a3a3;
+        }
+    }
+}
+
+.topic {
+    &>a {
+        text-decoration: none;
+        font-style: italic;
+        font-size: 15px;
+        color: #f6b536;
+        border-radius: 5px;
+        border: 1px solid #d1d3d2;
+    }
+}

@@ -1,0 +1,87 @@
+<mat-card>
+  <div class="d-flex mb-3">
+    <div class="user-info d-flex align-items-center">
+      <div class="avatar img-wrapper">
+        <a><img [src]="defaultAvatarPath" alt="" /></a>
+      </div>
+      <div class="pl-2">
+        <div class="user-name font-weight-bold">
+          <a>{{ post.user?.nickName || post.user?.name }}</a>
+        </div>
+        <div class="posted-time">
+          {{ post.created_at | timeAgo }}
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="topic mb-3">
+    <a class="d-inline-block px-4 py-1">{{ post.topic_name }}</a>
+  </div>
+  <mat-card-title class="post-title font-weight-bold">
+    <a>{{ post.title }}</a>
+  </mat-card-title>
+  <mat-card-content>
+    <div class="post-description">
+      {{ post.description }}
+    </div>
+    <div class="document my-3 px-2">
+      <a [href]="post.documentFile ? backendPath + post.documentFile : post.documentLink" target="_blank" [title]="post.documentFile ? backendPath + post.documentFile : post.documentLink">{{ post.documentFile ? backendPath + post.documentFile : post.documentLink }}</a>
+    </div>
+  </mat-card-content>
+  <mat-card-actions class="my-3 mx-0">
+    <div class="d-flex">
+      <div class="w-100">
+        <a><i class="fa fa-heart" style="color: #ff3d3d"></i></a>
+        <span class="ml-2">{{ post.like || 0 }}</span>
+      </div>
+      <div class="w-100 text-center">
+        <a><i class="fa fa-map-pin" style="color: #3d78ff"></i></a>
+        <span class="ml-2">{{ post.pin || 0 }}</span>
+      </div>
+      <div class="w-100 text-center">
+        <a><i class="fa fa-share-alt" style="color: #449546"></i></a>
+        <span class="ml-2">{{ post.share || 0 }}</span>
+      </div>
+      <div class="w-100 text-right">
+        <a><i class="fa fa-minus-circle" style="color: #151515"></i></a>
+        <span class="ml-2">{{ post.report || 0 }}</span>
+      </div>
+    </div>
+  </mat-card-actions>
+  <mat-card-footer class="my-3 mx-0">
+    <div class="comment">
+      <div class="more pb-3">
+        <a class="font-weight-bold">Xem bình luận trước đó</a>
+      </div>
+      <div class="d-flex align-items-start mb-3">
+        <div class="d-flex align-items-center">
+          <div class="user-comment-avatar img-wrapper">
+            <img [src]="defaultAvatarPath" alt="" />
+          </div>
+          <div class="user-name pl-2">
+            <a class="font-weight-bold">Phan Thanh Phong</a>
+          </div>
+        </div>
+        <div class="pl-3 comment-content">
+          <p>Thật không thể tin nổi</p>
+        </div>
+      </div>
+      <div class="d-flex align-items-start mb-3">
+        <div class="d-flex align-items-center">
+          <div class="user-comment-avatar img-wrapper">
+            <img [src]="defaultAvatarPath" alt="" />
+          </div>
+          <div class="user-name pl-2">
+            <a class="font-weight-bold">Phan Thanh Phong</a>
+          </div>
+        </div>
+        <div class="pl-3 comment-content">
+          <p>Đây là một phát hiện rất hay, mong rằng nó sẽ được ứng dụng rộng rãi</p>
+        </div>
+      </div>
+      <div class="my-comment">
+        <input type="text" placeholder="Nhập bình luận của bạn" class="w-100 px-3 py-2" />
+      </div>
+    </div>
+  </mat-card-footer>
+</mat-card>

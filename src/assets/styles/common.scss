@@ -1,0 +1,79 @@
+@import './variable.scss';
+
+@font-face {
+    font-family: FBGGFont;
+    src: url('/assets/fonts/MyriadPro-Regular.otf');
+}
+
+body {
+    font-family: FBGGFont;
+    background-color: $main-color;
+}
+
+.fbgg-bg {
+    background-color: $main-color;
+}
+
+.login-wrapper {
+    min-height: 100vh;
+}
+
+.img-wrapper {
+    img {
+        width: 100%;
+        height: 100%;
+    }
+}
+
+a {
+    cursor: pointer;
+}
+
+button:focus {
+    outline: none;
+}
+
+textarea {
+    resize: unset;
+}
+
+.mix-icon-wrapper {
+    width: 18px !important;
+    height: 18px !important;
+}
+
+.mat-progress-bar {
+    z-index: 9999;
+    position: fixed !important;
+}
+
+.mat-dialog-container {
+    background-color: $main-color !important;
+}
+
+.dropdown-item.active, .dropdown-item:active {
+    background-color: #f8e9cc; 
+}
+
+.mix-icon-wrapper {
+    position: relative;
+
+    .notifi {
+        top: -4px;
+        right: -4px;
+        position: absolute;
+        display: flex;
+    
+        .notifi-count-value {
+            width: 12px;
+            justify-content: center;
+            height: 12px;
+            font-size: 9px;
+            display: flex;
+            color: #fff;
+            border-radius: 4px;
+            background-color: #fa3e3e;
+            align-items: center;
+        }
+    }
+}

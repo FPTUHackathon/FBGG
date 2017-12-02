@@ -1,0 +1,35 @@
+.animated-bg {
+    animation-duration: 1.5s;
+    animation-fill-mode: forwards;
+    animation-iteration-count: infinite;
+    animation-name: placeHolderShimmer;
+    animation-timing-function: linear;
+    background: linear-gradient(to right, #e5e5e5 8%, #ddd 18%, #e5e5e5 33%);
+    -webkit-background-size:800px 104px
+}
+
+.preload-wrapper {
+    background-color: #f4f7f5;
+}
+
+.preload-avatar {
+    border-radius: 50%;
+    display: block;
+    width: 45px;
+    height: 40px;
+}
+
+.preload-content {
+    height: 188px;
+}
+
+.preload-bar {
+    height: 8px;
+    border-radius: 10px;
+}
+
+
+@keyframes placeHolderShimmer { 
+    0% { background-position: -420px 0 }
+    100% { background-position: 420px 0 }
+}

@@ -1,0 +1,16 @@
+.img-wrapper {
+    width: 52px;
+    height: 32px;
+}
+
+.upload-wrapper {
+    i {
+        font-size: 30px;
+        color: darkcyan;
+    }
+    input {
+        &:disabled {
+            cursor: pointer;
+        }
+    }
+}
