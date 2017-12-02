@@ -21,6 +21,8 @@ exports.connectSocket = function(server,app){
 	msg_2.createCollection();
 	var msg_group = require("../database/msg_group");
 	msg_group.createCollection();
+	var name_msg_group = require("../database/name_msg_group");
+	name_msg_group.createCollection();
 	
 
 	io.on("connection",function(socket){
@@ -223,9 +225,15 @@ exports.connectSocket = function(server,app){
 				});
 			});
 		});
+		// req creat chat group
+		socket.on("req_creat_group",function(data){
+			name_msg_group.addCollection(data);
+		});
 		//get name group
-		socket.on("req_send_name_group",function(data){
-
+		socket.on("req_send_all_name_group",function(data){
+			name_msg_group.find({user_id_group:data.user_id_group}).then(function(items){
+				socket.emit("server_send_all_name_group",items);
+			});
 		});
 		// new msg group
 		socket.on("req_new_msg_group",function(data){
