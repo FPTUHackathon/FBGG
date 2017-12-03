@@ -22,6 +22,7 @@ a:hover{
     color: #09843e;
 
     .hide-box {
+        z-index: 100;
         width: 350px;
         position: absolute;
         display: none;
@@ -105,4 +106,9 @@ a:hover{
         border-radius: 5px;
         border: 1px solid #d1d3d2;
     }
+}
+
+.active {
+    border: none !important;
+    background-color: #e6e6e6;
 }

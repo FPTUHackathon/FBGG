@@ -27,6 +27,7 @@ import { ChatboxListService } from './shared/services/chatbox-list/chatbox-list.
 import { ChatboxService } from './shared/services/chatbox/chatbox.service';
 import { ChatlogSocketService } from './shared/services/chatlog/chatlog-socket.service';
 import { MessageSocketService } from './shared/services/chatlog/message-socket.service';
+import { DocumentService } from './shared/services/document/document.service';
 
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
@@ -69,7 +70,8 @@ import { NotFoundComponent } from './not-found/not-found.component';
     ChatboxListService,
     ChatboxService,
     ChatlogSocketService,
-    MessageSocketService
+    MessageSocketService,
+    DocumentService,
   ],
   bootstrap: [AppComponent]
 })
@@ -93,5 +95,6 @@ export class AppModule {
     this.messageSocketService.consumeEvenOnReceiveMessage();
     this.userSocketService.consumeEventOnAddNote();
     this.userSocketService.consumeEventOnGetNotes();
+    this.messageSocketService.consumeEventOnReceiveUserInfo();
   }
 }

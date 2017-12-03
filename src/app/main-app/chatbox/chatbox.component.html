@@ -17,15 +17,15 @@
     <div class="chat-list d-flex flex-column justify-content-end">
       <div class="d-flex flex-column-reverse w-100">
         <ng-container *ngFor="let message of chatbox.msg">
-          <ng-container *ngIf="message.id_user_send != user._id">
+          <ng-container *ngIf="message.user_id_send != user._id">
             <div class="text-wrapper mb-2">
-              {{ message.content }}
+              {{ message.msg }}
             </div>
           </ng-container>
-          <ng-container *ngIf="message.id_user_send == user._id">
-            <div class="d-flex flex-column align-items-end">
-              <div class="my-text-wrapper mb-2">
-                {{ message.content }}
+          <ng-container *ngIf="message.user_id_send == user._id">
+            <div class="text-right">
+              <div class="my-text-wrapper mb-2 d-inline-block">
+                {{ message.msg }}
               </div>
             </div>
           </ng-container>

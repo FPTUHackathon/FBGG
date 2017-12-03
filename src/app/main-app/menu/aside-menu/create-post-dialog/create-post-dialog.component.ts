@@ -119,6 +119,8 @@ export class CreatePostDialogComponent implements OnInit {
       formData.append('created_at', JSON.stringify(Date.now()));
       formData.append('updated_at', JSON.stringify(Date.now()));
       formData.append('documentFile', this.documentFile.nativeElement.files[0]);
+      formData.append('price', this.createPostForm.value.price);
+      console.log(formData.get('topic_name'));
       this.postService.addPostToServer(formData)
       .subscribe(res => {
         console.log(res);

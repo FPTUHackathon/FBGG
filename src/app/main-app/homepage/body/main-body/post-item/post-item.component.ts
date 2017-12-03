@@ -21,17 +21,23 @@ export class PostItemComponent implements OnInit, OnDestroy {
   _subscriptions: Subscription[] = [];
   defaultAvatarPath: string = DEFAULT_AVATAR_PATH;
   backendPath = BACKEND_PATH;
+  path: string;
   user: any = {};
   notes: any[] = [];
+  isComment = true;
+  isSetting = false;
 
   constructor(
     private userService: UserService,
     private userSocketService: UserSocketService,
     private chatboxService: ChatboxService,
-    private chatlogService: ChatlogSocketService
+    private chatlogSocketService: ChatlogSocketService
   ) { }
 
   ngOnInit() {
+    this.post.price = Number.isInteger(Number(this.post.price)) ? Number(this.post.price).toFixed(3) : this.post.price;
+    this.post.referDocuments = JSON.parse(this.post.referDocuments);
+
     this.user = this.userService.getUser();
     this._subscriptions.push(this.userService.userChange.subscribe(user => {
       this.user = user;
@@ -41,6 +47,9 @@ export class PostItemComponent implements OnInit, OnDestroy {
     this._subscriptions.push(this.userService.notesChange.subscribe(notes => {
       this.notes = notes;
     }));
+    console.log(this.post);
+    const link = this.post.documentFile || this.post.documentLink;
+    this.path = this.backendPath + '/' + this.user._id + '/' + this.post._id + link;
   }
 
   ngOnDestroy() {
@@ -55,13 +64,12 @@ export class PostItemComponent implements OnInit, OnDestroy {
     });
     console.log(chatbox);
     if (!chatbox) {
-      this.chatlogService.getMessagesHistory([currentUser._id, targetUser._id]);
+      this.chatlogSocketService.getMessagesHistory({user_id_send: currentUser._id, user_id_receive: targetUser._id});
       const newChatbox = {
         currentUser: currentUser,
         targetUser: targetUser,
         isClose: false,
         isCollase: false,
-        array_id_user: [currentUser._id, targetUser._id],
         msg: []
       };
       this.chatboxService.addChatbox(newChatbox);
@@ -99,5 +107,20 @@ export class PostItemComponent implements OnInit, OnDestroy {
       data.updated_at = new Date();
       this.userSocketService.addNote(data);
     }
+  }
+
+  openDocument() {
+    console.log(this.path);
+    window.open(this.path);
+  }
+
+  thue() {
+    console.log(123);
+    window.open('http://localhost:3000/5/5a237178d6cb0f20bcc7dee0/upload/2.docx');
+  }
+
+  buy() {
+    console.log(456);
+    window.open('http://localhost:3000/2/5a237178d6cb0f20bcc7dee0/upload/2.docx');
   }
 }

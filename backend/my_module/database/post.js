@@ -21,7 +21,6 @@ exports.addCollection = function(data){
 				if (err) throw err;
 				autoIncrement.getNextSequence(db, name_collection, function (err, autoIndex) {
 					var collection = db.collection(name_collection);
-					
 			        collection.insert({
 			            _id: autoIndex,
 			            title:data.title,
@@ -30,6 +29,7 @@ exports.addCollection = function(data){
 						referDocuments:data.referDocuments,
 						user_id:data.user_id,
 						topic_name:data.topic_name,
+						price:data.price || 0,
 			            author:data.author || '',
 			            linkShare:data.linkShare || '',
 						type:data.type || '',

@@ -13,19 +13,17 @@ export class ChatlogSocketService {
     private chatboxService: ChatboxService
   ) { }
 
-  getMessagesHistory(arrayIdUser: any[]) {
-    Socket.emit('req_send_all_msg_2', {array_id_user: arrayIdUser});
+  getMessagesHistory(data) {
+    Socket.emit('req_send_all_msg_2', data);
   }
 
   consumeEvenOnReceiveMessage() {
-    Socket.on('server_send_all_msg_limit_5', data => {
-      console.log(data);
-      const msg: any[] = [];
-
-      data.forEach(val => {
-        msg.push(val.msg);
+    Socket.on('server_send_all_msg_2', data => {
+      let msg: any[] = this.chatboxService.getSelectChatbox().msg;
+      msg = msg.concat(data);
+      msg.sort((a, b) => {
+        return b._id - a._id; 
       });
-
       this.chatboxService.getSelectChatbox().msg = msg;
     });
   }

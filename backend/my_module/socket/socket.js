@@ -25,6 +25,8 @@ exports.connectSocket = function(server,app){
 	name_msg_2.createCollection();
 	var note = require("../database/note");
 	note.createCollection();
+	var pay = require("../database/pay");
+	pay.createCollection();
 
 	io.on("connection",function(socket){
 		console.log("connected socket: " + socket.id);
@@ -74,6 +76,33 @@ exports.connectSocket = function(server,app){
 			jwt.verify(data.token,'FBGGJWTToken',function(err,decoded){
 				decoded_token = decoded;
 			});			
+		});
+		// pay post  1 mua 2 thue
+		socket.on("req_pay_post",function(data){
+			var token;
+			if (data.type == 1) {
+				 token = jwt.sign(data.type, 'FBGGJWTToken',{
+					expiresIn: '999y' // expires in 999 day
+				  });
+			}else if (data.type == 2) {
+				 token = jwt.sign(dt_inssert, 'FBGGJWTToken',{
+					expiresIn: data.time + 'd' // expires in ? day
+				  });
+			}
+			mongo_client.connect(url,function(err,db){
+				if (err) throw err;
+				autoIncrement.getNextSequence(db, name_collection, function (err, autoIndex) {
+			        var collection = db.collection(name_collection);
+			        collection.insert({
+                        _id: autoIndex,
+                        user_id_pay:data.user_id_pay,
+                        post_id:data.post_id,
+                        token:token
+			        });
+			        console.log("inserted collection pay");
+			    });
+			});
+
 		});
 		// get user
 		socket.on("req_get_user",function(data){
@@ -142,6 +171,7 @@ exports.connectSocket = function(server,app){
 			  mongo_client.connect(url, function(err, db) {
 				if (err) throw err;
 				var documentLink;
+				console.log(req.body);
 				var myobj = {
 					title:req.body.title,
 					description:req.body.description,
@@ -149,6 +179,7 @@ exports.connectSocket = function(server,app){
 					referDocuments:req.body.referDocuments,
 					user_id:Number(req.body.user_id),
 					topic_name:req.body.topic_name,
+					price:req.body.price || 0,
 					author:req.body.author || '',
 					linkShare:req.body.linkShare || '',
 					type:req.body.type || '',
@@ -222,8 +253,8 @@ exports.connectSocket = function(server,app){
 		});
 		//get name msg 2
 		socket.on("req_send_all_name_msg_2",function(data){
-			name_msg_2.find({array_id_user:data.array_id_user}).then(function(items){
-				socket.emit("server_send_all_name_group",items);
+			name_msg_2.find({user_id_send:data.user_id_send,user_id_receive:data.user_id_receive}).then(function(items){
+				socket.emit("server_send_all_name_msg",items);
 			});
 		});
 		// new msg 2
@@ -236,11 +267,14 @@ exports.connectSocket = function(server,app){
 			mongo_client.connect(url, function(err, db) {
 				if (err) throw err;
 				console.log(data);
-				db.collection("msg_2").find({array_id_user:data.array_id_user}).sort({_id: -1}).limit(5).toArray(function(err, result) {
+				db.collection("msg_2").find({user_id_send:data.user_id_receive,user_id_receive:data.user_id_send}).toArray(function(err, result) {
 				  if (err) throw err;
-				  socket.emit("server_send_all_msg_limit_5",result);
-				  db.close();
+				  socket.emit("server_send_all_msg_2",result);		  
 				});
+				db.collection("msg_2").find({user_id_send:data.user_id_send,user_id_receive:data.user_id_receive}).toArray(function(err, result) {
+					if (err) throw err;
+					socket.emit("server_send_all_msg_2",result);
+				  });
 			});
 		});
 		//delete note

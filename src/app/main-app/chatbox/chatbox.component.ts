@@ -41,15 +41,11 @@ export class ChatboxComponent implements OnInit {
   sendMessage(e) {
     if (e.key === 'Enter') {
       const data: any = {};
-      data.array_id_user = this.chatbox.array_id_user;
-      data.msg = {
-        id_user_send: this.chatbox.currentUser._id,
-        content: this.messageForm.value.message,
-        created_at: new Date(),
-        updated_at: new Date(),
-        type_msg: 1,
-        user_seen: [this.chatbox.currentUser._id]
-      }
+      data.user_id_send = this.user._id;
+      data.user_id_receive = this.chatbox.targetUser._id;
+      data.msg = this.messageForm.value.message;
+      data.created_at = new Date();
+      data.updated_at = new Date();
       this.messageSocketService.sendMessage(data);
       this.messageForm.reset();
     }

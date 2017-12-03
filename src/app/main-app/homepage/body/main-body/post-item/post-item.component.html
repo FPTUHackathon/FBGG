@@ -1,5 +1,5 @@
 <mat-card>
-  <div class="d-flex mb-3">
+  <div class="d-flex mb-3 justify-content-between">
     <div class="user-info d-flex align-items-center">
       <div class="avatar img-wrapper">
         <a><img [src]="defaultAvatarPath" alt="" /></a>
@@ -20,8 +20,18 @@
         </div>
       </div>
     </div>
+    <div *ngIf="post.price" style="color: #09843e" class="font-italic">
+      <div>{{ post.price }} VNĐ</div>
+      <mat-menu #appMenu="matMenu">
+        <button mat-menu-item (click)="thue()">Thuê</button>
+        <button mat-menu-item (click)="buy()">Mua</button>
+      </mat-menu>
+      <button mat-raised-button [matMenuTriggerFor]="appMenu">
+        Thanh toán
+      </button>
+    </div>
   </div>
-  <div class="topic mb-3">
+  <div class="topic mb-3 d-flex justify-content-between">
     <a class="d-inline-block px-4 py-1">{{ post.topic_name }}</a>
   </div>
   <mat-card-title class="post-title font-weight-bold">
@@ -32,60 +42,106 @@
       {{ post.description }}
     </div>
     <div class="document my-3 px-2">
-      <a [href]="post.documentFile ? backendPath + post.documentFile : post.documentLink" target="_blank" [title]="post.documentFile ? backendPath + post.documentFile : post.documentLink">{{ post.documentFile ? backendPath + post.documentFile : post.documentLink }}</a>
+      <a (click)="openDocument()" [title]="post.documentFile ? 'localhost:4200/' + post.documentFile : post.documentLink">{{ post.documentFile ? 'http://localhost:4200/' + post.documentFile : post.documentLink }}</a>
+    </div>
+    <div class="reference mt-2 d-flex">
+      <div>Tài liệu tham khảo :</div>
+    </div>
+    <div class="document my-2 px-2 d-inline-flex" *ngFor="let referDocument of post.referDocuments">
+      <a [title]="referDocument.link" href="referDocument.link">{{ referDocument.link }}</a>
     </div>
   </mat-card-content>
   <mat-card-actions class="my-3 mx-0">
-    <div class="d-flex">
-      <div class="w-100">
+    <div class="d-flex pt-2" style="border-top: 1px solid #cdcdcd">
+      <div class="pr-5">
         <a><i class="fa fa-heart" style="color: #ff3d3d"></i></a>
         <span class="ml-2">{{ post.like || 0 }}</span>
       </div>
-      <div class="w-100 text-center">
+      <div class="pr-5">
         <a (click)="note(post)"><i class="fa fa-map-pin" style="color: #3d78ff"></i></a>
         <span class="ml-2">{{ post.pin || 0 }}</span>
       </div>
-      <div class="w-100 text-center">
+      <div class="pr-5">
         <a><i class="fa fa-share-alt" style="color: #449546"></i></a>
         <span class="ml-2">{{ post.share || 0 }}</span>
       </div>
-      <div class="w-100 text-right">
+      <div class="pr-5">
         <a><i class="fa fa-minus-circle" style="color: #151515"></i></a>
         <span class="ml-2">{{ post.report || 0 }}</span>
       </div>
     </div>
   </mat-card-actions>
   <mat-card-footer class="my-3 mx-0">
-    <div class="comment">
-      <div class="more pb-3">
-        <a class="font-weight-bold">Xem bình luận trước đó</a>
+    <div class="action">
+      <div class="row">
+        <a class="col-6 text-center" style="text-decoration: none !important; border: 1px solid #dbdedc" [ngClass]="{'active': isComment}" (click)="isComment = true; isSetting = false">
+          Bình luận
+        </a>
+        <a class="col-6 text-center" style="text-decoration: none !important; border: 1px solid #dbdedc" [ngClass]="{'active': isSetting}" (click)="isComment = false; isSetting = true">
+          Hiệu chỉnh
+        </a>
       </div>
-      <div class="d-flex align-items-start mb-3">
-        <div class="d-flex align-items-center">
-          <div class="user-comment-avatar img-wrapper">
-            <img [src]="defaultAvatarPath" alt="" />
+    </div>
+    <div class="comment pt-3">
+      <ng-container *ngIf="isComment">
+        <div class="more pb-3">
+          <a class="font-weight-bold">Xem bình luận trước đó</a>
+        </div>
+        <div class="d-flex align-items-start mb-3">
+          <div class="d-flex align-items-start">
+            <div class="user-comment-avatar img-wrapper d-flex align-items-start">
+              <img [src]="defaultAvatarPath" alt="" />
+            </div>
+            <div class="user-name pl-2">
+              <a class="font-weight-bold">Phan Thanh Phong</a>
+              <div class="hide-box">
+                <div class="bg-white p-2" (click)="openChatbox(user, post.user)">
+                  <a class="img-wrapper mix-icon-wrapper d-block">
+                    <img src="/assets/imgs/message_icon.png" alt="" />
+                  </a>
+                </div>
+              </div>
+            </div>
           </div>
-          <div class="user-name pl-2">
-            <a class="font-weight-bold">Phan Thanh Phong</a>
+          <div class="pl-3 comment-content">
+            <p>Thật không thể tin nổi</p>
           </div>
         </div>
-        <div class="pl-3 comment-content">
-          <p>Thật không thể tin nổi</p>
-        </div>
-      </div>
-      <div class="d-flex align-items-start mb-3">
-        <div class="d-flex align-items-center">
-          <div class="user-comment-avatar img-wrapper">
-            <img [src]="defaultAvatarPath" alt="" />
+        <div class="d-flex align-items-start mb-3">
+          <div class="d-flex align-items-start">
+            <div class="user-comment-avatar img-wrapper d-flex align-items-start">
+              <img [src]="defaultAvatarPath" alt="" />
+            </div>
+            <div class="user-name pl-2">
+              <a class="font-weight-bold">Phan Thanh Phong</a>
+            </div>
           </div>
-          <div class="user-name pl-2">
-            <a class="font-weight-bold">Phan Thanh Phong</a>
+          <div class="pl-3 comment-content">
+            <p>Đây là một phát hiện rất hay, mong rằng nó sẽ được ứng dụng rộng rãi</p>
           </div>
         </div>
-        <div class="pl-3 comment-content">
-          <p>Đây là một phát hiện rất hay, mong rằng nó sẽ được ứng dụng rộng rãi</p>
+      </ng-container>
+      <ng-container *ngIf="isSetting">
+        <div class="more pb-3">
+          <a class="font-weight-bold">Xem bình luận trước đó</a>
         </div>
-      </div>
+        <div class="d-flex align-items-start mb-3">
+          <div class="d-flex align-items-start">
+            <div class="user-comment-avatar img-wrapper d-flex align-items-start">
+              <img [src]="defaultAvatarPath" alt="" />
+            </div>
+            <div class="user-name pl-2">
+              <a class="font-weight-bold">Phan Thanh Phong</a>
+            </div>
+          </div>
+          <div class="pl-3 comment-content">
+            <p>Tôi có thêm một số phần bổ sung cho tài liệu của bạn</p>
+          </div>
+        </div>
+        <div class="document my-3 px-2">
+          <a href="https://drive.google.com/drive/u/0/?utm_source=en_US&pli=1">https://drive.google.com/drive/u/0/?utm_source=en_US&pli=1</a>
+        </div>
+      </ng-container>
       <div class="my-comment">
         <input type="text" placeholder="Nhập bình luận của bạn" class="w-100 px-3 py-2" />
       </div>

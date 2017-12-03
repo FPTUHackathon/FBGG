@@ -8,6 +8,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatRadioModule } from '@angular/material/radio';
 import { ReactiveFormsModule } from '@angular/forms';
 import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
+import { HttpModule } from '@angular/http';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
     MatRadioModule,
     ReactiveFormsModule,
     PerfectScrollbarModule,
+    HttpModule,
   ],
   exports: [
     MatMenuModule,
@@ -32,7 +34,8 @@ import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
     MatSelectModule,
     MatRadioModule,
     ReactiveFormsModule,
-    PerfectScrollbarModule
+    PerfectScrollbarModule,
+    HttpModule
   ]
 })
 export class SharedModule { }

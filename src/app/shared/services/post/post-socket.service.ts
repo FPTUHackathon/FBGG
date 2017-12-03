@@ -35,6 +35,7 @@ export class PostSocketService implements OnInit {
 
   consumeEventOnGetPosts() {
     Socket.on('server_send_post_and_comment', data => {
+      console.log(data);
       const post: any = data.post;
       post.user = data.user_post;
       post.comment = data.comment;

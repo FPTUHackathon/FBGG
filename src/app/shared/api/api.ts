@@ -12,3 +12,7 @@ export const TOPIC = {
 export const POST = {
     add: BACKEND_PATH + '/api/post'
 }
+
+export const DOCUMENT = {
+    open: BACKEND_PATH + '/upload/'   
+}

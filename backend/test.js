@@ -18,14 +18,18 @@
 // 		db.close();
 // 	})
 // });
+var jwt = require("jsonwebtoken");
+var token = jwt.sign({type: 1}, 'FBGGJWTToken',{
+  expiresIn: '3d' // expires in 3 day
+});
+
 
 var data = {
-  user_id_group:[2,3,4], // array id
-  name_group:"team"
+  user_id_pay:"2",
+  post_id:'5a237178d6cb0f20bcc7dee0',
+  token:token
 };
 
-var name_msg_group = require("../backend/my_module/database/name_msg_group");
-// name_msg_group.addCollection(data);
-name_msg_group.find({user_id_group:[2,3]}).then(function(data){
-  console.log(data);
-})
+var pay = require("./my_module/database/pay");
+// pay.dropCollection();
+pay.addCollection(data);

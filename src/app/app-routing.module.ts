@@ -15,6 +15,7 @@ const appRoutes: Routes = [
     path: '',
     children: [
       { path: '', loadChildren: './main-app/main-app.module#MainAppModule', canActivate: [AuthGuardService] },
+      { path: 'upload/:filename', loadChildren: './document/document.module#DocumentModule' },
       { path: 'dang-nhap', component: LoginComponent, canActivate: [CheckLoginService] },
       { path: 'dang-ky', component: RegisterComponent }
     ]
