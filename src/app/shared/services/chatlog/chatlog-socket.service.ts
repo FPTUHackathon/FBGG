@@ -20,6 +20,13 @@ export class ChatlogSocketService {
   consumeEvenOnReceiveMessage() {
     Socket.on('server_send_all_msg_limit_5', data => {
       console.log(data);
+      const msg: any[] = [];
+
+      data.forEach(val => {
+        msg.push(val.msg);
+      });
+
+      this.chatboxService.getSelectChatbox().msg = msg;
     });
   }
 }

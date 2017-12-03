@@ -48,7 +48,11 @@ textarea {
 }
 
 .mat-dialog-container {
+    padding: 0 !important;
+    overflow: unset !important;
+    height: unset !important;
     background-color: $main-color !important;
+    
 }
 
 .dropdown-item.active, .dropdown-item:active {
@@ -76,4 +80,16 @@ textarea {
             align-items: center;
         }
     }
+}
+
+.fbgg-button {
+    background-color: #3d9e64 !important;
+}
+
+.mat-form-field-disabled .mat-form-field-underline {
+    background-color: rgba(0,0,0,.42) !important;
+}
+
+.mat-dialog-content {
+    overflow: unset !important;
 }

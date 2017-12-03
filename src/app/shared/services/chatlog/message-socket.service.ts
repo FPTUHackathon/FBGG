@@ -23,8 +23,9 @@ export class MessageSocketService {
       const chatbox = this.chatboxService.chatboxList.find(val => {
         return this.checkEqualArray(val.array_id_user, data.array_id_user);
       });
+      console.log(chatbox);
       if (chatbox) {
-        chatbox.messages.unshift(data.msg);
+        chatbox.msg.unshift(data.msg);
       }
     });
   }
@@ -33,7 +34,7 @@ export class MessageSocketService {
     if (array1.length && array2.length) {
       let l = array1.length;
       for (let i = 0; i < l; i++) {
-        if (array1[i] != array2[i]) {
+        if (array2.indexOf(array1[i]) == -1) {
           return false;
         }
       }

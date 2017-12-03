@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 
 @Injectable()
 export class ChatboxService {
+  selectChatbox: any;
   chatboxList: any[] = [];
 
   constructor() { }
@@ -14,4 +15,11 @@ export class ChatboxService {
     return this.chatboxList;
   }
   
+  getSelectChatbox() {
+    return this.selectChatbox;
+  }
+
+  setSelectChatbox(chatbox) {
+    this.selectChatbox = chatbox;
+  }
 }

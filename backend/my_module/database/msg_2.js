@@ -23,16 +23,9 @@ exports.addCollection = function(data){
 			        var collection = db.collection(name_collection);
 			        collection.insert({
 			            _id: autoIndex,
-                        array_id_user:data.array_id_user, //array id user
-                        msg:{
-                            id_user_send:data.msg.id_user_send,
-                            content:data.msg.connect,
-                            created_at:data.msg.created_at,
-                            updated_at:data.msg.updated_at,
-                            type_msg:data.msg.type_msg,
-                            active:1,
-                            user_seen:data.msg.user_seen
-                        }
+                        user_id_send:data.user_id_send,
+                        user_id_receive:data.user_id_receive,
+                        msg:data.msg
 			        });
 			        console.log("inserted collection "+ name_collection);
 			    });

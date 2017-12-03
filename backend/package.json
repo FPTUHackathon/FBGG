@@ -17,6 +17,7 @@
     "google-auth-library": "^0.12.0",
     "googleapis": "^23.0.0",
     "jsonwebtoken": "^8.1.0",
+    "mammoth": "^1.4.3",
     "mongodb": "^2.2.33",
     "mongodb-autoincrement": "^1.0.1",
     "socket.io": "^2.0.4"

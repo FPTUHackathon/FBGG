@@ -16,13 +16,13 @@
   <perfect-scrollbar style="max-height: 290px" class="pr-2" #chatList>
     <div class="chat-list d-flex flex-column justify-content-end">
       <div class="d-flex flex-column-reverse w-100">
-        <ng-container *ngFor="let message of chatbox.messages">
-          <ng-container *ngIf="message.id_user_send != chatbox.targetUser._id">
+        <ng-container *ngFor="let message of chatbox.msg">
+          <ng-container *ngIf="message.id_user_send != user._id">
             <div class="text-wrapper mb-2">
               {{ message.content }}
             </div>
           </ng-container>
-          <ng-container *ngIf="message.id_user_send == chatbox.targetUser._id">
+          <ng-container *ngIf="message.id_user_send == user._id">
             <div class="d-flex flex-column align-items-end">
               <div class="my-text-wrapper mb-2">
                 {{ message.content }}

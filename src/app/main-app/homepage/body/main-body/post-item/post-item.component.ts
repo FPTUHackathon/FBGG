@@ -56,7 +56,16 @@ export class PostItemComponent implements OnInit, OnDestroy {
     console.log(chatbox);
     if (!chatbox) {
       this.chatlogService.getMessagesHistory([currentUser._id, targetUser._id]);
-      this.chatboxService.addChatbox({currentUser: currentUser, targetUser: targetUser, isClose: false, isCollase: false, array_id_user: [currentUser._id, targetUser._id], messages: []});
+      const newChatbox = {
+        currentUser: currentUser,
+        targetUser: targetUser,
+        isClose: false,
+        isCollase: false,
+        array_id_user: [currentUser._id, targetUser._id],
+        msg: []
+      };
+      this.chatboxService.addChatbox(newChatbox);
+      this.chatboxService.setSelectChatbox(newChatbox);
     } else {
       chatbox.isClose = !chatbox.isClose;
     }

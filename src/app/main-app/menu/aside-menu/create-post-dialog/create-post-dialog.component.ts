@@ -22,6 +22,10 @@ export class CreatePostDialogComponent implements OnInit {
   topics: any[] = [];
   filteredTopics: Observable<any[]>;
   user: any = {};
+  documentTypes :any[] = [
+    { id: 1, name: 'Miễn phí' },
+    { id: 2, name: 'Có phí' }
+  ];
 
   constructor(
     public dialog: MatDialogRef<CreatePostDialogComponent>,
@@ -43,7 +47,9 @@ export class CreatePostDialogComponent implements OnInit {
       documentLink: ['', Validators.required],
       documentFile: [''],
       referDocuments: this._fb.array([this.initReferDocument()]),
-      topics: ['', Validators.required]
+      topics: ['', Validators.required],
+      type: [1],
+      price: ['']
     });
 
     this.topicService.getAll()

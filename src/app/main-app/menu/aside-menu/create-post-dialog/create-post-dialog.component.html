@@ -1,77 +1,118 @@
-<h2 mat-dialog-title>Tạo mới tài liệu</h2>
-<form [formGroup]="createPostForm" (ngSubmit)="onSubmit()" enctype="multipart/form-data">
-  <mat-dialog-content>
-    <div class="d-flex">
-      <div class="img-wrapper mr-4 mt-3">
-        <img src="/assets/imgs/title-icon.png" alt="" />
+<div class="header py-2 px-3">
+  <div>Tạo mới tài liệu</div>
+</div>
+
+<form [formGroup]="createPostForm" (ngSubmit)="onSubmit()" enctype="multipart/form-data" class="mix-bg pl-4">
+  <mat-dialog-content class="py-4">
+    <perfect-scrollbar style="max-height: 65vh" class="pr-4">
+      <div class="d-flex">
+        <mat-form-field class="w-100">
+          <mat-placeholder>
+            <a class="d-inline-block img-wrapper icon">
+              <img src="/assets/imgs/title-icon.png" alt="" />
+            </a>
+            Tiêu đề
+          </mat-placeholder>
+          <input matInput type="text" required="required" formControlName="title" />
+        </mat-form-field>
       </div>
-      <mat-form-field class="w-100">
-        <input matInput type="text" placeholder="Tiêu đề bài viết của bạn là gì?" required="required" formControlName="title" />
-      </mat-form-field>
-    </div>
-    <div class="d-flex">
-      <div class="img-wrapper mr-4 mt-3">
-        <img src="/assets/imgs/description-icon.png" alt="" />
+      <div class="d-flex">
+        <mat-form-field class="w-100">
+          <mat-placeholder>
+            <a class="d-inline-block img-wrapper icon">
+              <img src="/assets/imgs/update.png" alt="" />
+            </a>
+            Mô tả cho tài liệu của bạn
+          </mat-placeholder>
+          <textarea matInput autosize formControlName="description" row="1" style="resize: none">
+          </textarea>
+        </mat-form-field>
       </div>
-      <mat-form-field class="w-100">
-        <textarea matInput autosize placeholder="Mô tả ngắn cho tài liệu của bạn" formControlName="description">
-        </textarea>
-      </mat-form-field>
-    </div>
-    <div class="d-flex">
-      <div class="img-wrapper mr-4 mt-3">
-        <img src="/assets/imgs/blue-document-icon.png" alt="" />
+      <div class="d-flex">
+        <mat-form-field class="w-100">
+          <mat-placeholder>
+            <a class="d-inline-block img-wrapper icon">
+              <img src="/assets/imgs/link (1).png" alt="" />
+            </a>
+            Link tài liệu của bạn
+          </mat-placeholder>
+          <input type="text" matInput formControlName="documentLink" required="required" />
+        </mat-form-field>
       </div>
-      <mat-form-field class="w-100">
-        <input type="text" matInput placeholder="Link tài liệu của bạn" formControlName="documentLink" required="required" />
-      </mat-form-field>
-    </div>
-    <label class="d-flex upload-wrapper" for="documentFile">
-      <div class="img-wrapper mt-3 mr-4" style="cursor: pointer">
-        <i class="fa fa-cloud-upload"></i>
-      </div>
-      <mat-form-field class="w-100" style="cursor: pointer">
-        <input type="text" matInput placeholder="Hoặc up file" disabled="disabled" />
-      </mat-form-field>
-      <input type="file" name="" id="documentFile" hidden="hidden" (change)="documentFileChange(documentFile)" #documentFile accept=".pdf, .doc, .docx, .xls, .xlsx" />
-    </label>
-    <div formArrayName="referDocuments">
-      <div *ngFor="let referDocument of createPostForm.controls.referDocuments.controls; let i = index">
-        <div [formGroupName]="i">
-          <div class="d-flex">
-            <div style="margin-right: 5rem">
-            </div>
-            <div class="d-flex w-100">
-              <div class="img-wrapper mt-3 mr-4">
-                <img src="/assets/imgs/pink-document-icon.png" alt="" />
+      <label class="d-flex upload-wrapper" for="documentFile">
+        <mat-form-field class="w-100" style="cursor: pointer">
+          <mat-placeholder>
+            <a class="d-inline-block img-wrapper icon">
+              <img src="/assets/imgs/cloud-computing.png" alt="" />
+            </a>
+            Hoặc upload file
+          </mat-placeholder>
+          <input type="text" matInput disabled="disabled" />
+        </mat-form-field>
+        <input type="file" name="" id="documentFile" hidden="hidden" (change)="documentFileChange(documentFile)" #documentFile accept=".pdf, .doc, .docx, .xls, .xlsx" />
+      </label>
+      <div formArrayName="referDocuments">
+        <div *ngFor="let referDocument of createPostForm.controls.referDocuments.controls; let i = index">
+          <div [formGroupName]="i">
+            <div class="d-flex">
+              <div style="margin-right: 5rem">
               </div>
-              <mat-form-field class="w-100">
-                <input type="text" matInput placeholder="Tài liệu tham khảo" formControlName="link" required="required" />
-              </mat-form-field>
+              <div class="d-flex w-100">
+                <mat-form-field class="w-100">
+                  <mat-placeholder>
+                    <a class="d-inline-block img-wrapper icon">
+                      <img src="/assets/imgs/link.png" alt="" />
+                    </a>
+                    Link tài liệu tham khảo
+                  </mat-placeholder>
+                  <input type="text" matInput formControlName="link" required="required" />
+                </mat-form-field>
+              </div>
+              <a (click)="removeReferDocument(i)">x</a>
             </div>
-            <a (click)="removeReferDocument(i)">x</a>
+          </div>
+        </div>
+        <div class="d-flex justify-content-end">
+          <div class="icon img-wrapper" style="cursor: pointer" (click)="addReferDocument()">
+            <img src="/assets/imgs/plus-empty.png" alt="" />
           </div>
         </div>
       </div>
-      <div class="d-flex justify-content-end">
-        <div class="mix-icon" style="cursor: pointer" (click)="addReferDocument()">
-          <img src="/assets/imgs/add-refer-document-icon.png" alt="" />
+      <div>
+        <div>
+          <mat-radio-group formControlName="type">
+            <mat-radio-button [value]="1" color="primary">Miễn phí</mat-radio-button>
+            <mat-radio-button [value]="2" color="primary">Có phí</mat-radio-button>
+          </mat-radio-group>
+        </div>
+        <div class="row">
+          <div class="col-4">
+            <mat-form-field>
+              <mat-placeholder>
+                <a class="d-inline-block img-wrapper icon">
+                  <img src="/assets/imgs/idea.png" alt="" />
+                </a>
+                Chủ đề
+              </mat-placeholder>
+              <input type="text" matInput formControlName="topics" [matAutocomplete]="auto" required="required">
+              <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+                <mat-option *ngFor="let topic of filteredTopics | async" [value]="topic">
+                  {{ topic.name }}
+                </mat-option>
+              </mat-autocomplete>
+            </mat-form-field>
+          </div>
+          <div class="col-6">
+            <mat-form-field *ngIf="createPostForm.value.type == 2">
+              <input type="number" matInput placeholder="Giá tiền (VNĐ)" formControlName="price" />
+            </mat-form-field>
+          </div>
         </div>
       </div>
-    </div>
-    <div>
-    <mat-form-field class="example-full-width">
-      <input type="text" placeholder="Chủ đề" matInput formControlName="topics" [matAutocomplete]="auto" required="required">
-      <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
-        <mat-option *ngFor="let topic of filteredTopics | async" [value]="topic">
-          {{ topic.name }}
-        </mat-option>
-      </mat-autocomplete>
-    </mat-form-field>
-    </div>
+    </perfect-scrollbar>
   </mat-dialog-content>
-  <mat-dialog-actions class="justify-content-end mt-3">
+  <mat-dialog-actions class="justify-content-end mt-3 pr-3">
     <button mat-raised-button (click)="dialog.close()" class="mr-2">Hủy</button>
-    <button mat-raised-button color="primary">Đăng bài</button>
+    <button mat-raised-button class="fbgg-button text-white">Đăng bài</button>
   </mat-dialog-actions>
 </form>

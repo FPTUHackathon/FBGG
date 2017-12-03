@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder } from '@angular/forms';
 
 import { ChatboxService } from '../../shared/services/chatbox/chatbox.service';
 import { MessageSocketService } from '../../shared/services/chatlog/message-socket.service';
+import { UserService } from '../../shared/services/user/user.service';
 
 @Component({
   selector: 'app-chatbox',
@@ -16,17 +17,21 @@ export class ChatboxComponent implements OnInit {
   @Input() index: number;
 
   messageForm: FormGroup;
+  user: any;
 
   constructor(
     private fb: FormBuilder,
     private chatboxService: ChatboxService,
-    private messageSocketService: MessageSocketService
+    private messageSocketService: MessageSocketService,
+    private userService: UserService
   ) { }
 
   ngOnInit() {
     this.messageForm = this.fb.group({
       message: ['']
     });
+
+    this.user = this.userService.getUser();
 
     setTimeout(() => {
       this.chatList.directiveRef.scrollToBottom();      
@@ -42,7 +47,7 @@ export class ChatboxComponent implements OnInit {
         content: this.messageForm.value.message,
         created_at: new Date(),
         updated_at: new Date(),
-        type: 1,
+        type_msg: 1,
         user_seen: [this.chatbox.currentUser._id]
       }
       this.messageSocketService.sendMessage(data);

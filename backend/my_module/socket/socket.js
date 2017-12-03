@@ -235,7 +235,8 @@ exports.connectSocket = function(server,app){
 		socket.on("req_send_all_msg_2",function(data){
 			mongo_client.connect(url, function(err, db) {
 				if (err) throw err;
-				db.collection("msg_2").find({array_id_user:data.array_id_user}).limit(5).toArray(function(err, result) {
+				console.log(data);
+				db.collection("msg_2").find({array_id_user:data.array_id_user}).sort({_id: -1}).limit(5).toArray(function(err, result) {
 				  if (err) throw err;
 				  socket.emit("server_send_all_msg_limit_5",result);
 				  db.close();

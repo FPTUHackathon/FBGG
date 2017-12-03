@@ -23,7 +23,6 @@ export class PostSocketService implements OnInit {
 
   consumeEventOnAdd() {
     Socket.on('server_send_new_post', data => {
-      console.log(data);
       const user = this.userService.getUser();
       data.user = user;
 
@@ -37,7 +36,6 @@ export class PostSocketService implements OnInit {
   consumeEventOnGetPosts() {
     Socket.on('server_send_post_and_comment', data => {
       const post: any = data.post;
-      console.log(data);
       post.user = data.user_post;
       post.comment = data.comment;
       this.postService.addPost(post);

@@ -44,7 +44,6 @@ export class UserSocketService {
   consumeEventOnGetNotes() {
     Socket.on('server_send_all_note', data => {
       this.userService.setNotes(data);
-      console.log(data);
     });
   }
 }
